@@ -2,7 +2,7 @@
   cursor: pointer;
   font: inherit;
   border: none;
-  background-color: #fb2803;
+  background-color: #ff1616;
   color: white;
   padding: 0.75rem 3rem;
   display: flex;
@@ -11,6 +11,7 @@
   border-radius: 25px;
   font-weight: bold;
   margin-right: 10%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover,
