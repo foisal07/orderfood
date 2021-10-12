@@ -10,13 +10,11 @@ export default function Header() {
         <h1>OrderFood</h1>
         <HeaderCartButton />
       </header>
-      <div className={classes["main-image"]}>
-        <h1>
-          Delicious Food,
-          <br />
-          Delivered To You
-        </h1>
-        <img src={heroImage} alt="Foods" />
+      <div className={classes.container}>
+        <div className={classes["main-image"]}>
+          <img src={heroImage} alt="Foods" />
+          <h1>Delicious Food, Delivered To You</h1>
+        </div>
       </div>
     </>
   );
