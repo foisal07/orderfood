@@ -4,12 +4,12 @@ import classes from "./Header.module.css";
 import heroImage from "../../assets/heroimage.png";
 import logo from "../../assets/reactfood.png";
 
-export default function Header() {
+export default function Header({onShow}) {
   return (
     <>
       <header className={classes.header}>
         <img src={logo} alt="Foods" />
-        <HeaderCartButton />
+        <HeaderCartButton onClick={onShow} />
       </header>
       <div className={classes.container}>
         <div className={classes["main-image"]}>

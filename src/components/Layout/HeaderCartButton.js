@@ -1,12 +1,11 @@
 import React from "react";
 import classes from "./HeaderCartButton.module.css";
-import CartIcon
- from "../Cart/CartIcon";
+import CartIcon from "../Cart/CartIcon";
 
-export default function HeaderCartButton() {
+export default function HeaderCartButton({ onClick }) {
   return (
     <>
-      <button className={classes.button}>
+      <button className={classes.button} onClick={onClick}>
         <span className={classes.icon}>
           <CartIcon />
         </span>

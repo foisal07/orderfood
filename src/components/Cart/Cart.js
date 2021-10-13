@@ -2,7 +2,7 @@ import classes from "./Cart.module.css";
 
 import React from "react";
 
-export default function Cart() {
+export default function Cart({ onClose }) {
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map((item) => (
@@ -12,7 +12,6 @@ export default function Cart() {
   );
   return (
     <>
-      {" "}
       <div>
         {cartItems}
         <div className={classes.total}>
@@ -20,7 +19,9 @@ export default function Cart() {
           <span>35.62</span>
         </div>
         <div className={classes.actions}>
-          <button className={classes["button--alt"]}>Close</button>
+          <button className={classes["button--alt"]} onClick={onClose}>
+            Close
+          </button>
           <button className={classes.button}>Order</button>
         </div>
       </div>

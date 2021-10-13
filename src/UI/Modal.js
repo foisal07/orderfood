@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Modal.module.css";
 import { createPortal } from "react-dom";
 
-export default function Modal({ children }) {
+export default function Modal({ children, onClose }) {
   const Backdrop = () => {
     return <div className={classes.backdrop} />;
   };
