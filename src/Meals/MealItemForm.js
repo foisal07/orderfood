@@ -3,7 +3,6 @@ import classes from "./MealItemForm.module.css";
 import Input from "../UI/Input";
 
 export default function MealItemForm({ id }) {
-
   return (
     <>
       <form className={classes.form}>

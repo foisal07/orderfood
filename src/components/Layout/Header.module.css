@@ -17,6 +17,11 @@
   display: grid;
   justify-content: center;
 }
+.heading {
+  font-size: 3rem;
+  color: #434343;
+  align-self: center;
+}
 .main-image {
   margin: 8rem 1rem 4rem 1rem;
   z-index: 0;
@@ -25,12 +30,6 @@
   overflow: hidden;
   max-width: 60rem;
   justify-items: center;
-}
-
-.main-image h1 {
-  font-size: 3rem;
-  color: #ff1616;
-  align-self: center;
 }
 
 .main-image img {

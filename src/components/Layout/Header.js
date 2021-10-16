@@ -14,7 +14,7 @@ export default function Header({onShow}) {
       <div className={classes.container}>
         <div className={classes["main-image"]}>
           <img src={heroImage} alt="Foods" />
-          <h1>Delicious Food, Delivered To You</h1>
+          <h1 className={classes.heading}>Delicious Food, Delivered To You</h1>
         </div>
       </div>
     </>
