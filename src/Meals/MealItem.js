@@ -5,6 +5,18 @@ import { useContext } from "react";
 import CartContext from "../store/cart-context";
 
 export default function MealItem({ id, name, description, price }) {
+  
+  const cartCtx = useContext(CartContext);
+
+  const addToCartHandler = (amount) => {
+    cartCtx.addItem({
+      id: id,
+      amount: amount,
+      description: description,
+      price: price,
+    });
+  };
+
   return (
     <>
       <li className={classes.meal}>
@@ -14,7 +26,7 @@ export default function MealItem({ id, name, description, price }) {
           <div className={classes.price}>{price}</div>
         </div>
         <div>
-          <MealItemForm id={id} />
+          <MealItemForm id={id} onAddToCart={addToCartHandler} />
         </div>
       </li>
     </>

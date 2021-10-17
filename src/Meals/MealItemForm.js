@@ -22,6 +22,8 @@ export default function MealItemForm({ id, onAddToCart }) {
       setAmountIsValid(false);
       return;
     }
+
+    onAddToCart(enteredAmountNumber);
   };
 
   return (
