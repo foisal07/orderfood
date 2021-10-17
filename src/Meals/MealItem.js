@@ -5,11 +5,11 @@ import { useContext } from "react";
 import CartContext from "../store/cart-context";
 
 export default function MealItem({ id, name, description, price }) {
-  
   const cartCtx = useContext(CartContext);
 
   const addToCartHandler = (amount) => {
     cartCtx.addItem({
+      name: name,
       id: id,
       amount: amount,
       description: description,
