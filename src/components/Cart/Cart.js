@@ -7,8 +7,13 @@ import CartItem from "./CartItem";
 export default function Cart({ onClose }) {
   const cartCtx = useContext(CartContext);
 
-  const removeItemHandler = () => {};
-  const addItemHandler = () => {};
+  const addItemHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const removeItemHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
@@ -18,8 +23,8 @@ export default function Cart({ onClose }) {
           amount={item.amount}
           price={item.price}
           key={item.id}
-          onAdd={addItemHandler}
-          onRemove={removeItemHandler}
+          onAdd={addItemHandler.bind(null, item)}
+          onRemove={removeItemHandler.bind(null, item.id)}
         />
       ))}
     </ul>
