@@ -4,6 +4,8 @@ import MealItem from "./MealItem";
 import Card from "../UI/Card";
 
 export default function AvailableMeals() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [loadedMeals, setLoadedMeals] = useState([]);
 
   useEffect(() => {
@@ -11,6 +13,11 @@ export default function AvailableMeals() {
       const response = await fetch(
         "https://reactorderfood-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
       );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong...");
+      }
+
       const data = await response.json();
 
       const loadedMeals = [];
@@ -23,11 +30,15 @@ export default function AvailableMeals() {
           price: data[key].price,
         });
       }
-      
-      setLoadedMeals(loadedMeals)
+
+      setLoadedMeals(loadedMeals);
+      setIsLoading(false);
     };
 
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setError(error.message);
+    });
   }, []);
 
   const mealsList = loadedMeals.map((meal) => (
@@ -40,11 +51,15 @@ export default function AvailableMeals() {
     />
   ));
 
+  const loading = "Loading...";
+
   return (
     <>
       <section className={classes.meals}>
         <Card>
-          <ul>{mealsList}</ul>
+          <ul>{!isLoading && !error && mealsList}</ul>
+          <ul>{isLoading && loading}</ul>
+          <ul>{error && error}</ul>
         </Card>
       </section>
     </>
