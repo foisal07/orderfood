@@ -36,7 +36,7 @@ export default function Cart({ onClose }) {
         {cartItems}
         <div className={classes.total}>
           <span>Total Amount</span>
-          <span>{cartCtx.totalAmount.toFixed(2)}</span>
+          <span>{cartCtx.totalPrice.toFixed(2)}</span>
         </div>
         <div className={classes.actions}>
           <button className={classes["button--alt"]} onClick={onClose}>
