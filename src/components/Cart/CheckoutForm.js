@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useState } from "react/cjs/react.development";
 import classes from "./CheckoutForm.module.css";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ onCancel, onConfirm }) {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     address: true,
@@ -36,6 +36,12 @@ export default function CheckoutForm() {
       isEneteredNameValid && isEneteredAddressValid && isEneteredPhoneValid;
 
     if (!isFormValid) return;
+
+    onConfirm({
+      name: enteredName,
+      address: enteredAddress,
+      phone: enteredPhone
+    });
   };
 
   const nameControlClasses = `${classes.control} ${
@@ -50,7 +56,7 @@ export default function CheckoutForm() {
 
   return (
     <>
-      <form className={nameControlClasses} onSubmit={confirmHandler}>
+      <form className={classes.form} onSubmit={confirmHandler}>
         <div className={classes.control}>
           <label htmlFor="name">Name</label>
           <input type="text" ref={enteredNameRef} />
@@ -72,7 +78,9 @@ export default function CheckoutForm() {
         </div>
 
         <div className={classes.action}>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
           <button className={classes.submit}>Confirm</button>
         </div>
       </form>

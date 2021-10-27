@@ -8,6 +8,8 @@ import CheckoutForm from "./CheckoutForm";
 
 export default function Cart({ onClose }) {
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
 
   const cartCtx = useContext(CartContext);
 
@@ -17,6 +19,25 @@ export default function Cart({ onClose }) {
 
   const removeItemHandler = (id) => {
     cartCtx.removeItem(id);
+  };
+
+  const checkoutFormHandler = () => {
+    setShowCheckoutForm(true);
+  };
+
+  const confirmHandler = async (userData) => {
+    setIsSubmitting(true);
+    await fetch(
+      "https://reactorderfood-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          ordered: cartCtx.items,
+        }),
+      }
+    );
+    setDidSubmit(true);
   };
 
   const cartItems = (
@@ -34,28 +55,28 @@ export default function Cart({ onClose }) {
     </ul>
   );
 
-  const checkoutForm = () => {
-    setShowCheckoutForm(true);
-  };
-
   return (
     <>
       <div>
-        {cartItems}
+        {!didSubmit && cartItems}
         <div className={classes.total}>
           <span>Total Amount</span>
           <span>{cartCtx.totalPrice.toFixed(2)}</span>
         </div>
+
         <div className={classes.actions}>
           <button className={classes["button--alt"]} onClick={onClose}>
             Close
           </button>
-          <button className={classes.button} onClick={checkoutForm}>
+          <button className={classes.button} onClick={checkoutFormHandler}>
             Order
           </button>
-          {showCheckoutForm && <CheckoutForm />}
         </div>
       </div>
+
+      {showCheckoutForm && (
+        <CheckoutForm onCancel={onClose} onConfirm={confirmHandler} />
+      )}
     </>
   );
 }
