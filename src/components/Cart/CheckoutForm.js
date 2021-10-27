@@ -40,7 +40,7 @@ export default function CheckoutForm({ onCancel, onConfirm }) {
     onConfirm({
       name: enteredName,
       address: enteredAddress,
-      phone: enteredPhone
+      phone: enteredPhone,
     });
   };
 
@@ -57,7 +57,7 @@ export default function CheckoutForm({ onCancel, onConfirm }) {
   return (
     <>
       <form className={classes.form} onSubmit={confirmHandler}>
-        <div className={classes.control}>
+        <div className={nameControlClasses}>
           <label htmlFor="name">Name</label>
           <input type="text" ref={enteredNameRef} />
           {!formInputsValidity.name && <p>Please enter a valid name!</p>}

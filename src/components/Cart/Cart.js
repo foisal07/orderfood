@@ -26,7 +26,6 @@ export default function Cart({ onClose }) {
   };
 
   const confirmHandler = async (userData) => {
-    setShowCheckoutForm(false);
     setIsSubmitting(true);
     await fetch(
       "https://reactorderfood-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
@@ -40,6 +39,7 @@ export default function Cart({ onClose }) {
     );
     setIsSubmitting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (
@@ -60,19 +60,26 @@ export default function Cart({ onClose }) {
   const cartModalContent = (
     <div>
       {cartItems}
+
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{cartCtx.totalPrice.toFixed(2)}</span>
       </div>
 
-      <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={onClose}>
-          Close
-        </button>
-        <button className={classes.button} onClick={checkoutFormHandler}>
-          Order
-        </button>
-      </div>
+      {!showCheckoutForm && (
+        <div className={classes.actions}>
+          <button className={classes["button--alt"]} onClick={onClose}>
+            Close
+          </button>
+          <button className={classes.button} onClick={checkoutFormHandler}>
+            Order
+          </button>
+        </div>
+      )}
+
+      {showCheckoutForm && (
+        <CheckoutForm onCancel={onClose} onConfirm={confirmHandler} />
+      )}
     </div>
   );
 
@@ -93,10 +100,7 @@ export default function Cart({ onClose }) {
     <>
       {!isSubmitting && !didSubmit && cartModalContent}
       {isSubmitting && isSubmittingModalContent}
-      {didSubmit && didSubmitModalContent}
-      {showCheckoutForm && (
-        <CheckoutForm onCancel={onClose} onConfirm={confirmHandler} />
-      )}
+      {!isSubmitting && didSubmit && didSubmitModalContent}
     </>
   );
 }
