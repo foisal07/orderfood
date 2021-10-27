@@ -5,8 +5,8 @@ import Card from "../UI/Card";
 
 export default function AvailableMeals() {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [loadedMeals, setLoadedMeals] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchMeals = async () => {

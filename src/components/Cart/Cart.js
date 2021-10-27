@@ -3,8 +3,12 @@ import classes from "./Cart.module.css";
 import React, { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
+import { useState } from "react/cjs/react.development";
+import CheckoutForm from "./CheckoutForm";
 
 export default function Cart({ onClose }) {
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+
   const cartCtx = useContext(CartContext);
 
   const addItemHandler = (item) => {
@@ -30,6 +34,10 @@ export default function Cart({ onClose }) {
     </ul>
   );
 
+  const checkoutForm = () => {
+    setShowCheckoutForm(true);
+  };
+
   return (
     <>
       <div>
@@ -42,7 +50,10 @@ export default function Cart({ onClose }) {
           <button className={classes["button--alt"]} onClick={onClose}>
             Close
           </button>
-          <button className={classes.button}>Order</button>
+          <button className={classes.button} onClick={checkoutForm}>
+            Order
+          </button>
+          {showCheckoutForm && <CheckoutForm />}
         </div>
       </div>
     </>
